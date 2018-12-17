@@ -1,0 +1,103 @@
+entity Client {
+  nom String,
+ tel Long,
+
+ picture ImageBlob,
+}
+entity Compte {
+adressSolidty String,
+}
+entity Categorie
+{
+ nom String
+}
+entity Fournisseur {
+   nom String,
+	Tel Long,
+	fax Long,
+    Mail String,
+    logo ImageBlob,
+}
+entity Produit {
+nom String,
+quantiteDisponible Long,
+picture ImageBlob,
+}
+entity Emprunt {
+activated Boolean,
+montant Long,
+date Instant,
+picture ImageBlob,
+}
+entity Rating {
+value Long,
+openion String 
+}
+entity Transaction{
+refT String,
+montant Long,
+date Instant,
+
+}
+entity Adresse {
+pays String,
+region String,
+ville String,
+rue String,
+codePostal Long
+}
+
+entity Contrat{
+ref String,
+quantiteCommander Long,
+}
+
+relationship OneToOne {
+	
+    Client{user(login)} to User
+    Fournisseur{user(login)} to User
+}
+
+
+
+
+
+relationship ManyToMany {
+	Categorie { produit(nom)}  to Produit{categorie(nom)} 
+   Fournisseur{produit(nom)} to Produit{founisseur(nom)}
+   Fournisseur{categorie(nom)} to Categorie { fournisseur(nom)}
+    Client {rating(value)} to Rating{client(nom)}
+    Fournisseur{adresse} to Adresse{founisseur} 
+    Client{adresse} to Adresse{client} 
+    Contrat{produit(nom)} to Produit{contrat}
+    Fournisseur{rating(value)} to Rating{fournisseur}
+    Transaction{contrat(ref)} to Contrat{transaction(refT)}
+    Fournisseur{contrat(ref)} to Contrat{fournisseur}
+    Client{contrat(ref)} to Contrat{client(nom)}
+}
+
+
+relationship OneToMany {
+	Emprunt{fournisseur} to Fournisseur{emprunt}
+    Client {compte(adressSolidty)} to Compte{client(nom)}
+    Fournisseur {compte(adressSolidty)} to Compte{fournisseur(nom)}
+   Emprunt{client} to Client{emprunt} 
+    Transaction{compte(adressSolidty)} to Compte{transaction(refT)}
+    Emprunt{contrat(ref)} to Contrat{emprunt}
+    
+}
+
+
+
+// Set pagination options
+paginate Transaction, Fournisseur , Produit with infinite-scroll
+paginate Compte, Categorie with pagination
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl 
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

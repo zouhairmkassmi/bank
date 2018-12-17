@@ -1,0 +1,54 @@
+<div class="container detail" *ngIf="fournisseur">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="pictures" *ngIf="fournisseur?.picture">
+            
+                    <a  [routerLink]="['/fournisseur-detail', fournisseur.id]">
+                        <img [src]="'data:' + fournisseur.pictureContentType + ';base64,' + fournisseur.picture" style="max-width: 70%;" alt="fournisseur image"/>
+                    </a>
+                   
+              
+        
+        </div>
+      </div>
+    
+    <div class="col-sm-6">
+            <dl class="row-md jh-entity-details" >
+      <p class="title">{{fournisseur.nom}}</span></dt>
+        <dd></p>
+      <p class="ref">telephone:  <b>{{fournisseur.tel}}</b></p>
+      <p class="details"> fax: <b> {{fournisseur.fax}}</b>
+      </p>
+      <p class="magnufactur">Email: <b>{{fournisseur.mail}}</b></p>
+    
+     
+      
+       </dl>
+    
+    </div>
+  </div>
+  <div class="main row"> 
+    <h4 class='card-title'>Listes des Produits </h4>
+    <div class="cards col-sm-4" *ngFor="let produit of produits">
+        
+        <div class='card' *ngIf="produit">
+            <div class='card-img-top'>
+              <a *ngIf="produit.picture" (click)="openFile(produit.pictureContentType, produit.picture)">
+                <img [src]="'data:' + produit.pictureContentType + ';base64,' + produit.picture" style="max-width: 70%;" alt="produit image"/>
+            </a>
+              
+
+
+            </div>
+            <div class='card-block'>
+                <h4 class='card-title'>Nom: {{produit.nom}}</h4>
+                <p class='card-text'>id: {{produit.id}}</p>
+                <p class='card-text'>quantite Disponible: {{produit.quantiteDisponible}}</p>
+               
+            </div>
+        </div>
+    </div>
+
+</div>
+</div> 
+

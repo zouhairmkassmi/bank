@@ -1,0 +1,88 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="fournisseur">
+            <h2><span jhiTranslate="bankApp.fournisseur.detail.title">Fournisseur</span> {{fournisseur.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="bankApp.fournisseur.nom">Nom</span></dt>
+                <dd>
+                    <span>{{fournisseur.nom}}</span>
+                </dd>
+                <dt><span jhiTranslate="bankApp.fournisseur.tel">Tel</span></dt>
+                <dd>
+                    <span>{{fournisseur.tel}}</span>
+                </dd>
+                <dt><span jhiTranslate="bankApp.fournisseur.fax">Fax</span></dt>
+                <dd>
+                    <span>{{fournisseur.fax}}</span>
+                </dd>
+                <dt><span jhiTranslate="bankApp.fournisseur.mail">Mail</span></dt>
+                <dd>
+                    <span>{{fournisseur.mail}}</span>
+                </dd>
+                <dt><span jhiTranslate="bankApp.fournisseur.logo">Logo</span></dt>
+                <dd>
+                    <div *ngIf="fournisseur.logo">
+                        <a (click)="openFile(fournisseur.logoContentType, fournisseur.logo)">
+                            <img [src]="'data:' + fournisseur.logoContentType + ';base64,' + fournisseur.logo" style="max-width: 100%;" alt="fournisseur image"/>
+                        </a>
+                        {{fournisseur.logoContentType}}, {{byteSize(fournisseur.logo)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="bankApp.fournisseur.user">User</span></dt>
+                <dd>
+                    {{fournisseur.user?.login}}
+                </dd>
+                <dt><span jhiTranslate="bankApp.fournisseur.produit">Produit</span></dt>
+                <dd>
+                    <span *ngFor="let produit of fournisseur.produits; let last = last">
+                        <a [routerLink]="['/produit', produit?.id, 'view' ]">{{produit.nom}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="bankApp.fournisseur.categorie">Categorie</span></dt>
+                <dd>
+                    <span *ngFor="let categorie of fournisseur.categories; let last = last">
+                        <a [routerLink]="['/categorie', categorie?.id, 'view' ]">{{categorie.nom}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="bankApp.fournisseur.adresse">Adresse</span></dt>
+                <dd>
+                    <span *ngFor="let adresse of fournisseur.adresses; let last = last">
+                        <a [routerLink]="['/adresse', adresse?.id, 'view' ]">{{adresse.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="bankApp.fournisseur.rating">Rating</span></dt>
+                <dd>
+                    <span *ngFor="let rating of fournisseur.ratings; let last = last">
+                        <a [routerLink]="['/rating', rating?.id, 'view' ]">{{rating.value}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="bankApp.fournisseur.contrat">Contrat</span></dt>
+                <dd>
+                    <span *ngFor="let contrat of fournisseur.contrats; let last = last">
+                        <a [routerLink]="['/contrat', contrat?.id, 'view' ]">{{contrat.ref}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="bankApp.fournisseur.emprunt">Emprunt</span></dt>
+                <dd>
+                    <div *ngIf="fournisseur.emprunt">
+                        <a [routerLink]="['/emprunt', fournisseur.emprunt?.id, 'view']">{{fournisseur.emprunt?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/fournisseur', fournisseur.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

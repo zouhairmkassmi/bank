@@ -1,0 +1,28 @@
+
+{
+    "bankApp": {
+        "emprunt" : {
+            "home": {
+                "title": "Emprunts",
+                "createLabel": "Create a new Emprunt",
+                "createOrEditLabel": "Create or edit a Emprunt"
+            },
+            "created": "A new Emprunt is created with identifier {{ param }}",
+            "updated": "A Emprunt is updated with identifier {{ param }}",
+            "deleted": "A Emprunt is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Emprunt {{ id }}?"
+            },
+            "detail": {
+                "title": "Emprunt"
+            },
+            "activated": "Activated",
+            "montant": "Montant",
+            "date": "Date",
+            "picture": "Picture",
+            "fournisseur": "Fournisseur",
+            "client": "Client",
+            "contrat": "Contrat"
+        }
+    }
+}

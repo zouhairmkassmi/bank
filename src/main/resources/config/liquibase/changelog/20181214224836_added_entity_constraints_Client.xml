@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Client.
+    -->
+    <changeSet id="20181214224836-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="client"
+                                 constraintName="fk_client_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="clients_id"
+                                 baseTableName="client_rating"
+                                 constraintName="fk_client_rating_clients_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="client"/>
+        <addForeignKeyConstraint baseColumnNames="ratings_id"
+                                 baseTableName="client_rating"
+                                 constraintName="fk_client_rating_ratings_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="rating"/>
+        
+        <addForeignKeyConstraint baseColumnNames="clients_id"
+                                 baseTableName="client_adresse"
+                                 constraintName="fk_client_adresse_clients_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="client"/>
+        <addForeignKeyConstraint baseColumnNames="adresses_id"
+                                 baseTableName="client_adresse"
+                                 constraintName="fk_client_adresse_adresses_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="adresse"/>
+        
+        <addForeignKeyConstraint baseColumnNames="clients_id"
+                                 baseTableName="client_contrat"
+                                 constraintName="fk_client_contrat_clients_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="client"/>
+        <addForeignKeyConstraint baseColumnNames="contrats_id"
+                                 baseTableName="client_contrat"
+                                 constraintName="fk_client_contrat_contrats_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="contrat"/>
+        
+        <addForeignKeyConstraint baseColumnNames="emprunt_id"
+                                 baseTableName="client"
+                                 constraintName="fk_client_emprunt_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="emprunt"/>
+
+    </changeSet>
+</databaseChangeLog>

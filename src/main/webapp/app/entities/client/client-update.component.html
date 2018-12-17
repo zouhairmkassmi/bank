@@ -1,0 +1,83 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-client-heading" jhiTranslate="bankApp.client.home.createOrEditLabel">Create or edit a Client</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!client.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="client.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="bankApp.client.nom" for="field_nom">Nom</label>
+                    <input type="text" class="form-control" name="nom" id="field_nom"
+                        [(ngModel)]="client.nom" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="bankApp.client.tel" for="field_tel">Tel</label>
+                    <input type="number" class="form-control" name="tel" id="field_tel"
+                        [(ngModel)]="client.tel" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="bankApp.client.picture" for="field_picture">Picture</label>
+                    <div>
+                        <img [src]="'data:' + client.pictureContentType + ';base64,' + client.picture" style="max-height: 100px;" *ngIf="client.picture" alt="client image"/>
+                        <div *ngIf="client.picture" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{client.pictureContentType}}, {{byteSize(client.picture)}}</span>
+                            <button type="button" (click)="clearInputImage('picture', 'pictureContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_picture" (change)="setFileData($event, client, 'picture', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="picture" id="field_picture"
+                        [(ngModel)]="client.picture" />
+                    <input type="hidden" class="form-control" name="pictureContentType" id="field_pictureContentType"
+                        [(ngModel)]="client.pictureContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="bankApp.client.user" for="field_user">User</label>
+                    <select class="form-control" id="field_user" name="user" [(ngModel)]="client.user" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id === client.user?.id ? client.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="bankApp.client.rating" for="field_rating">Rating</label>
+                    <select class="form-control" id="field_rating" multiple name="rating" [(ngModel)]="client.ratings">
+                        <option [ngValue]="getSelected(client.ratings, ratingOption)" *ngFor="let ratingOption of ratings; trackBy: trackRatingById">{{ratingOption.value}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="bankApp.client.adresse" for="field_adresse">Adresse</label>
+                    <select class="form-control" id="field_adresse" multiple name="adresse" [(ngModel)]="client.adresses">
+                        <option [ngValue]="getSelected(client.adresses, adresseOption)" *ngFor="let adresseOption of adresses; trackBy: trackAdresseById">{{adresseOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="bankApp.client.contrat" for="field_contrat">Contrat</label>
+                    <select class="form-control" id="field_contrat" multiple name="contrat" [(ngModel)]="client.contrats">
+                        <option [ngValue]="getSelected(client.contrats, contratOption)" *ngFor="let contratOption of contrats; trackBy: trackContratById">{{contratOption.ref}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="bankApp.client.emprunt" for="field_emprunt">Emprunt</label>
+                    <select class="form-control" id="field_emprunt" name="emprunt" [(ngModel)]="client.emprunt" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="empruntOption.id === client.emprunt?.id ? client.emprunt : empruntOption" *ngFor="let empruntOption of emprunts; trackBy: trackEmpruntById">{{empruntOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

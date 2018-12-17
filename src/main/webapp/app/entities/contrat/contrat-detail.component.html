@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="contrat">
+            <h2><span jhiTranslate="bankApp.contrat.detail.title">Contrat</span> {{contrat.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="bankApp.contrat.ref">Ref</span></dt>
+                <dd>
+                    <span>{{contrat.ref}}</span>
+                </dd>
+                <dt><span jhiTranslate="bankApp.contrat.quantiteCommander">Quantite Commander</span></dt>
+                <dd>
+                    <span>{{contrat.quantiteCommander}}</span>
+                </dd>
+                <dt><span jhiTranslate="bankApp.contrat.produit">Produit</span></dt>
+                <dd>
+                    <span *ngFor="let produit of contrat.produits; let last = last">
+                        <a [routerLink]="['/produit', produit?.id, 'view' ]">{{produit.nom}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="bankApp.contrat.emprunt">Emprunt</span></dt>
+                <dd>
+                    <div *ngIf="contrat.emprunt">
+                        <a [routerLink]="['/emprunt', contrat.emprunt?.id, 'view']">{{contrat.emprunt?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/contrat', contrat.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

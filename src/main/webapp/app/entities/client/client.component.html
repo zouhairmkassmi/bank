@@ -1,0 +1,91 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="bankApp.client.home.title">Clients</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-client" [routerLink]="['/client/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="bankApp.client.home.createLabel">
+            Create new Client
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="clients">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="bankApp.client.nom">Nom</span></th>
+            <th><span jhiTranslate="bankApp.client.tel">Tel</span></th>
+            <th><span jhiTranslate="bankApp.client.picture">Picture</span></th>
+            <th><span jhiTranslate="bankApp.client.user">User</span></th>
+            <th><span jhiTranslate="bankApp.client.rating">Rating</span></th>
+            <th><span jhiTranslate="bankApp.client.adresse">Adresse</span></th>
+            <th><span jhiTranslate="bankApp.client.contrat">Contrat</span></th>
+            <th><span jhiTranslate="bankApp.client.emprunt">Emprunt</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let client of clients ;trackBy: trackId">
+                <td><a [routerLink]="['/client', client.id, 'view' ]">{{client.id}}</a></td>
+                <td>{{client.nom}}</td>
+                <td>{{client.tel}}</td>
+                <td>
+                    <a *ngIf="client.picture" (click)="openFile(client.pictureContentType, client.picture)">
+                        <img [src]="'data:' + client.pictureContentType + ';base64,' + client.picture" style="max-height: 30px;" alt="client image"/>
+                    </a>
+                    <span *ngIf="client.picture">{{client.pictureContentType}}, {{byteSize(client.picture)}}</span>
+                </td>
+                <td>
+                    {{client.user?.login}}
+                </td>
+                <td>
+                    <span *ngFor="let rating of client.ratings; let last = last">
+                            <a class="form-control-static" [routerLink]="['../rating', rating?.id, 'view' ]">{{rating.value}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td>
+                    <span *ngFor="let adresse of client.adresses; let last = last">
+                            <a class="form-control-static" [routerLink]="['../adresse', adresse?.id, 'view' ]">{{adresse.id}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td>
+                    <span *ngFor="let contrat of client.contrats; let last = last">
+                            <a class="form-control-static" [routerLink]="['../contrat', contrat?.id, 'view' ]">{{contrat.ref}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td>
+                    <div *ngIf="client.emprunt">
+                        <a [routerLink]="['../emprunt', client.emprunt?.id, 'view' ]" >{{client.emprunt?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/client', client.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/client', client.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'client/'+ client.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

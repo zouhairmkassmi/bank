@@ -1,0 +1,29 @@
+.detail {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+.pictures img {
+    height: 350px;
+}
+
+.title {
+    font-weight: bold;
+}
+.details {
+    font-size: 15px;
+    text-align: justify;
+}
+
+.price {
+    font-size: 25px;
+    color: #0904da;
+    white-space: nowrap;
+    font-weight: bold;
+}
+.Quantity-bx {
+    width: 130px;
+}
+
+.buy-btn {
+    margin-top: 20px;
+}

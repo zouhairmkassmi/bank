@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Fournisseur.
+    -->
+    <changeSet id="20181214224839-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="fournisseur"
+                                 constraintName="fk_fournisseur_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="fournisseurs_id"
+                                 baseTableName="fournisseur_produit"
+                                 constraintName="fk_fournisseur_produit_fournisseurs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fournisseur"/>
+        <addForeignKeyConstraint baseColumnNames="produits_id"
+                                 baseTableName="fournisseur_produit"
+                                 constraintName="fk_fournisseur_produit_produits_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="produit"/>
+        
+        <addForeignKeyConstraint baseColumnNames="fournisseurs_id"
+                                 baseTableName="fournisseur_categorie"
+                                 constraintName="fk_fournisseur_categorie_fournisseurs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fournisseur"/>
+        <addForeignKeyConstraint baseColumnNames="categories_id"
+                                 baseTableName="fournisseur_categorie"
+                                 constraintName="fk_fournisseur_categorie_categories_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="categorie"/>
+        
+        <addForeignKeyConstraint baseColumnNames="fournisseurs_id"
+                                 baseTableName="fournisseur_adresse"
+                                 constraintName="fk_fournisseur_adresse_fournisseurs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fournisseur"/>
+        <addForeignKeyConstraint baseColumnNames="adresses_id"
+                                 baseTableName="fournisseur_adresse"
+                                 constraintName="fk_fournisseur_adresse_adresses_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="adresse"/>
+        
+        <addForeignKeyConstraint baseColumnNames="fournisseurs_id"
+                                 baseTableName="fournisseur_rating"
+                                 constraintName="fk_fournisseur_rating_fournisseurs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fournisseur"/>
+        <addForeignKeyConstraint baseColumnNames="ratings_id"
+                                 baseTableName="fournisseur_rating"
+                                 constraintName="fk_fournisseur_rating_ratings_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="rating"/>
+        
+        <addForeignKeyConstraint baseColumnNames="fournisseurs_id"
+                                 baseTableName="fournisseur_contrat"
+                                 constraintName="fk_fournisseur_contrat_fournisseurs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fournisseur"/>
+        <addForeignKeyConstraint baseColumnNames="contrats_id"
+                                 baseTableName="fournisseur_contrat"
+                                 constraintName="fk_fournisseur_contrat_contrats_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="contrat"/>
+        
+        <addForeignKeyConstraint baseColumnNames="emprunt_id"
+                                 baseTableName="fournisseur"
+                                 constraintName="fk_fournisseur_emprunt_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="emprunt"/>
+
+    </changeSet>
+</databaseChangeLog>

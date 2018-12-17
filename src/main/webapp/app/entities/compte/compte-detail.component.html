@@ -1,0 +1,45 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="compte">
+            <h2><span jhiTranslate="bankApp.compte.detail.title">Compte</span> {{compte.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="bankApp.compte.adressSolidty">Adress Solidty</span></dt>
+                <dd>
+                    <span>{{compte.adressSolidty}}</span>
+                </dd>
+                <dt><span jhiTranslate="bankApp.compte.client">Client</span></dt>
+                <dd>
+                    <div *ngIf="compte.client">
+                        <a [routerLink]="['/client', compte.client?.id, 'view']">{{compte.client?.nom}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="bankApp.compte.fournisseur">Fournisseur</span></dt>
+                <dd>
+                    <div *ngIf="compte.fournisseur">
+                        <a [routerLink]="['/fournisseur', compte.fournisseur?.id, 'view']">{{compte.fournisseur?.nom}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="bankApp.compte.transaction">Transaction</span></dt>
+                <dd>
+                    <div *ngIf="compte.transaction">
+                        <a [routerLink]="['/transaction', compte.transaction?.id, 'view']">{{compte.transaction?.refT}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/compte', compte.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

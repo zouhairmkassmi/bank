@@ -1,0 +1,34 @@
+
+{
+    "bankApp": {
+        "fournisseur" : {
+            "home": {
+                "title": "Fournisseurs",
+                "createLabel": "Créer un nouveau Fournisseur",
+                "createOrEditLabel": "Créer ou éditer un Fournisseur"
+            },
+            "created": "Un nouveau Fournisseur a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Fournisseur avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Fournisseur avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Fournisseur {{ id }} ?"
+            },
+            "detail": {
+                "title": "Fournisseur"
+            },
+            "nom": "Nom",
+            "tel": "Tel",
+            "fax": "Fax",
+            "mail": "Mail",
+            "logo": "Logo",
+            "user": "User",
+            "compte": "Compte",
+            "produit": "Produit",
+            "categorie": "Categorie",
+            "adresse": "Adresse",
+            "rating": "Rating",
+            "contrat": "Contrat",
+            "emprunt": "Emprunt"
+        }
+    }
+}

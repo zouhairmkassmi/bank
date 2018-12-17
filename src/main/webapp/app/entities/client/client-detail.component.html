@@ -1,0 +1,68 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="client">
+            <h2><span jhiTranslate="bankApp.client.detail.title">Client</span> {{client.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="bankApp.client.nom">Nom</span></dt>
+                <dd>
+                    <span>{{client.nom}}</span>
+                </dd>
+                <dt><span jhiTranslate="bankApp.client.tel">Tel</span></dt>
+                <dd>
+                    <span>{{client.tel}}</span>
+                </dd>
+                <dt><span jhiTranslate="bankApp.client.picture">Picture</span></dt>
+                <dd>
+                    <div *ngIf="client.picture">
+                        <a (click)="openFile(client.pictureContentType, client.picture)">
+                            <img [src]="'data:' + client.pictureContentType + ';base64,' + client.picture" style="max-width: 100%;" alt="client image"/>
+                        </a>
+                        {{client.pictureContentType}}, {{byteSize(client.picture)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="bankApp.client.user">User</span></dt>
+                <dd>
+                    {{client.user?.login}}
+                </dd>
+                <dt><span jhiTranslate="bankApp.client.rating">Rating</span></dt>
+                <dd>
+                    <span *ngFor="let rating of client.ratings; let last = last">
+                        <a [routerLink]="['/rating', rating?.id, 'view' ]">{{rating.value}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="bankApp.client.adresse">Adresse</span></dt>
+                <dd>
+                    <span *ngFor="let adresse of client.adresses; let last = last">
+                        <a [routerLink]="['/adresse', adresse?.id, 'view' ]">{{adresse.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="bankApp.client.contrat">Contrat</span></dt>
+                <dd>
+                    <span *ngFor="let contrat of client.contrats; let last = last">
+                        <a [routerLink]="['/contrat', contrat?.id, 'view' ]">{{contrat.ref}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="bankApp.client.emprunt">Emprunt</span></dt>
+                <dd>
+                    <div *ngIf="client.emprunt">
+                        <a [routerLink]="['/emprunt', client.emprunt?.id, 'view']">{{client.emprunt?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/client', client.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="container">
+        <div class="row">
+                <div class="col-md-5">
+                <h1 class="display-4" >Welcome, to Your bank!</h1>
+                <p class="lead" >This is your homepage</p>
+            
+                <div [ngSwitch]="isAuthenticated()">
+                    <div class="alert alert-success" *ngSwitchCase="true">
+                        <span *ngIf="account" jhiTranslate="home.logged.message"
+                            translateValues="{username: '{{account.login}}'}"> You are logged in as user "{{account.login}}". </span>
+                    </div>
+            
+                   
+                </div>
+                </div>
+ 
+    <div class="col-md-7">
+      
+
+        <ngb-carousel>
+            <ng-template ngbSlide *ngFor="let slider of sliders">
+                <img class="img-fluid mx-auto d-block" [src]="slider.imagePath" alt="Random first slide" width="50%">
+                <div class="carousel-caption">
+                    
+                </div>
+            </ng-template>
+        </ngb-carousel>
+        
+    </div>
+    
+</div>
+<div class="main row"> 
+
+    <div class="cards col-sm-4" *ngFor="let fournisseur of fournisseurs">
+        
+        <div class='card' *ngIf="fournisseur">
+            <div class='card-img-top'>
+                <a *ngIf="fournisseur?.logo" [routerLink]="['/fournisseur-detail', fournisseur.id]">
+                    <img class="img-fluid" [src]="'data:' + fournisseur.logoContentType + ';base64,' + fournisseur.logo" />
+                </a>
+              
+
+
+            </div>
+            <div class='card-block'>
+                <h4 class='card-title'>Nom: {{fournisseur.nom}}</h4>
+                <p class='card-text'>telephone: {{fournisseur.tel}}</p>
+                <p class='card-text'>Fax: {{fournisseur.fax}}</p>
+                <p class="price ">Email: {{fournisseur.mail}}</p>
+                <a class='btn btn-primary' [routerLink]="['/fournisseur-detail', fournisseur.id]" >Voir</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
